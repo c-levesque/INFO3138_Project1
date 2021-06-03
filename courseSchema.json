@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "title": "JSON Schema for my course objects",
+
+  "type": "object",
+
+  "required": [ "Code" ],
+
+  "properties": {
+    "Code": {
+      "type": "string",
+      "pattern": "^[A-Z]{4}-[0-9]{4}$",
+      "description": "A course code"
+    },
+    "Evaluations": {
+      "type": "array",
+      "description": "A collection of evaluation objects",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+
+        "required": [ "Description", "Weight", "EarnedMarks", "OutOf" ],
+
+        "properties": {
+          "Description": {
+            "type": "string",
+            "description": "A description of the evaluation."
+          },
+          "Weight": {
+            "type": "number",
+            "description": "The % of the course mark attributed to the evaluation",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "OutOf": {
+            "type": "integer",
+            "description": "The number of marks that represents a perfect score on the evaluation",
+            "minimum": 0
+          },
+          "EarnedMarks": {
+            "anyOf": [
+              { "type": "number" },
+              { "type": "null" }
+            ],
+            "description": "The % of the course mark attributed to the evaluation",
+            "minimum": 0
+          }
+        }
+      }
+    }
+  }
+}
